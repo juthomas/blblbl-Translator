@@ -9,8 +9,7 @@
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	padding: 30px;
-
+	padding-bottom: 30px;
 }
 
 .middleText {
@@ -26,6 +25,9 @@ h3
 }
 body 
 {
+	margin: 0;
+	padding: 0;
+	border: none;
 	text-align: center;
 
 	background-color: #fef9ef;
