@@ -1,0 +1,135 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="all">
+		<main class="head">
+			<h3>BLBLBLBLBL TRANSLATOR</h3>
+		</main>
+		<div class="corps">
+			<div class="translateRow">
+				<textarea name="" id="humanInput" cols="30" rows="10"></textarea>
+				<div>
+					human to blblbl
+					<br>
+					<br>
+					>>>>>
+				</div>
+				<textarea name="" id="blblblOutput" cols="30" rows="10" readonly></textarea>
+			</div>
+			<br>
+			<br>
+			<div class="translateRow">
+				<textarea name="" id="blblblInput" cols="30" rows="10"></textarea>
+				blblbl to human
+				<br>
+				<br>
+				>>>>>
+				<textarea name="" id="humanOutput" cols="30" rows="10" readonly></textarea>
+			</div>
+		</div>
+		<div class="foot">
+			lllbbb lbblllblblblllbbblb b lbbbbbllllllbllbbllbll lblbllbbbbblblbll lbbbblbllbblllblbbl llbbbblblbbblbllbb llblblbllbbblllblbllbbbblbbllllllllblbllll
+		</div>
+	</div>
+	<script>
+	function checkBaseValid(value, base)
+	{
+		for (var i = 0; i < value.length; i++)
+		{
+			if (base.includes(value[i]))
+			{
+				// console.log(value[i] + " : OK");
+			}
+			else
+			{
+				// console.log(value[i] + " : NOT OK");
+				return (false)
+			}
+		}
+		return (true)
+	}
+	function baseValidIndex(value, base)
+	{
+		for (var i = 0; i < value.length; i++)
+		{
+			if (base.includes(value[i]))
+			{
+				// console.log(value[i] + " : OK");
+			}
+			else
+			{
+				// console.log(value[i] + " : NOT OK");
+				return (i)
+			}
+		}
+		return (value.length);
+	}
+	
+	function convertBase(value, from_range, to_range) {
+		
+		if (!value || value == undefined)
+			return "";
+		var from_base = from_range.length;
+		var to_base = to_range.length;
+	
+		var dec_value = value.split('').reverse().reduce(function (carry, digit, index) {
+		  if (from_range.indexOf(digit) === -1) throw new Error('Invalid digit `'+digit+'` for base '+from_base+'.');
+		  return carry += from_range.indexOf(digit) * (Math.pow(from_base, index));
+		}, 0);
+		console.log(dec_value)
+		var new_value = '';
+		while (dec_value > 0) {
+		  new_value = to_range[dec_value % to_base] + new_value;
+		  dec_value = (dec_value - (dec_value % to_base)) / to_base;
+		}
+		return new_value || to_range[0];
+	}
+		document.addEventListener("DOMContentLoaded", function (event) {
+			let humanInput = document.getElementById("humanInput");
+			let blblblOutput = document.getElementById("blblblOutput");
+			let blblblInput = document.getElementById("blblblInput");
+			let humanOutput = document.getElementById("humanOutput");
+			
+			humanInput.addEventListener('input', ()=>{
+				// console.log("cc");
+				var translated = humanInput.value.replace(/[^a-zA-Z0-9?! ]/g, '').toLowerCase().split(" ").map(x => 
+				{
+					if (checkBaseValid(x, "abcdefghijklmnopqrstuvwxyz"))
+					return convertBase(x, "abcdefghijklmnopqrstuvwxyz", "bl");
+					else
+					{
+						let lastValid = baseValidIndex(x, "abcdefghijklmnopqrstuvwxyz")
+						console.log(x.substring(lastValid));
+						return convertBase(x.substring(0, lastValid ), "abcdefghijklmnopqrstuvwxyz", "bl") + x.substring(lastValid)
+					}
+					return x;
+				});
+				blblblOutput.value =  translated.join(" ");
+			})
+			blblblInput.addEventListener('input', ()=>{
+				console.log("cc");
+				var translated = blblblInput.value.replace(/[^blBL?! ]/g, '').toLowerCase().split(" ").map(x => 
+				{
+					if (checkBaseValid(x, "bl"))
+					return convertBase(x, "bl", "abcdefghijklmnopqrstuvwxyz");
+					else
+					{
+						let lastValid = baseValidIndex(x, "bl")
+						console.log(x.substring(lastValid));
+						return convertBase(x.substring(0, lastValid ), "bl", "abcdefghijklmnopqrstuvwxyz") + x.substring(lastValid)
+					}
+					return x;
+				});
+				console.log(translated)
+				humanOutput.value = translated.join(" ");
+			})
+		})
+	</script>
+</body>
+
+</html>

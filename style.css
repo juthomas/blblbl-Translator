@@ -1,0 +1,25 @@
+.translateRow{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.foot {
+	position: absolute;
+	bottom: 0;
+	padding: 30px;
+}
+
+h3 
+{
+	font-size: 2em;
+	color: #FE6D73;
+	padding: 40px;
+}
+body 
+{
+	text-align: center;
+	background-color: #fef9ef;
+	font-family: 'Courier New', Courier, monospace;
+}
