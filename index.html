@@ -45,13 +45,8 @@
 	{
 		for (var i = 0; i < value.length; i++)
 		{
-			if (base.includes(value[i]))
+			if (!base.includes(value[i]))
 			{
-				// console.log(value[i] + " : OK");
-			}
-			else
-			{
-				// console.log(value[i] + " : NOT OK");
 				return (false)
 			}
 		}
@@ -61,13 +56,8 @@
 	{
 		for (var i = 0; i < value.length; i++)
 		{
-			if (base.includes(value[i]))
+			if (!base.includes(value[i]))
 			{
-				// console.log(value[i] + " : OK");
-			}
-			else
-			{
-				// console.log(value[i] + " : NOT OK");
 				return (i)
 			}
 		}
@@ -85,7 +75,6 @@
 		  if (from_range.indexOf(digit) === -1) throw new Error('Invalid digit `'+digit+'` for base '+from_base+'.');
 		  return carry += from_range.indexOf(digit) * (Math.pow(from_base, index));
 		}, 0);
-		console.log(dec_value)
 		var new_value = '';
 		while (dec_value > 0) {
 		  new_value = to_range[dec_value % to_base] + new_value;
@@ -100,7 +89,6 @@
 			let humanOutput = document.getElementById("humanOutput");
 			
 			humanInput.addEventListener('input', ()=>{
-				// console.log("cc");
 				var translated = humanInput.value.replace(/[^a-zA-Z0-9?! ]/g, '').toLowerCase().split(" ").map(x => 
 				{
 					if (checkBaseValid(x, "_abcdefghijklmnopqrstuvwxyz"))
@@ -108,7 +96,6 @@
 					else
 					{
 						let lastValid = baseValidIndex(x, "_abcdefghijklmnopqrstuvwxyz")
-						console.log(x.substring(lastValid));
 						return convertBase(x.substring(0, lastValid ), "_abcdefghijklmnopqrstuvwxyz", "bl") + x.substring(lastValid)
 					}
 					return x;
@@ -116,7 +103,6 @@
 				blblblOutput.value =  translated.join(" ");
 			})
 			blblblInput.addEventListener('input', ()=>{
-				console.log("cc");
 				var translated = blblblInput.value.replace(/[^blBL?! ]/g, '').toLowerCase().split(" ").map(x => 
 				{
 					if (checkBaseValid(x, "bl"))
@@ -124,12 +110,10 @@
 					else
 					{
 						let lastValid = baseValidIndex(x, "bl")
-						console.log(x.substring(lastValid));
 						return convertBase(x.substring(0, lastValid ), "bl", "_abcdefghijklmnopqrstuvwxyz") + x.substring(lastValid)
 					}
 					return x;
 				});
-				console.log(translated)
 				humanOutput.value = translated.join(" ");
 			})
 		})
