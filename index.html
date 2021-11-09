@@ -103,13 +103,13 @@
 				// console.log("cc");
 				var translated = humanInput.value.replace(/[^a-zA-Z0-9?! ]/g, '').toLowerCase().split(" ").map(x => 
 				{
-					if (checkBaseValid(x, "abcdefghijklmnopqrstuvwxyz"))
-					return convertBase(x, "abcdefghijklmnopqrstuvwxyz", "bl");
+					if (checkBaseValid(x, "_abcdefghijklmnopqrstuvwxyz"))
+					return convertBase(x, "_abcdefghijklmnopqrstuvwxyz", "bl");
 					else
 					{
-						let lastValid = baseValidIndex(x, "abcdefghijklmnopqrstuvwxyz")
+						let lastValid = baseValidIndex(x, "_abcdefghijklmnopqrstuvwxyz")
 						console.log(x.substring(lastValid));
-						return convertBase(x.substring(0, lastValid ), "abcdefghijklmnopqrstuvwxyz", "bl") + x.substring(lastValid)
+						return convertBase(x.substring(0, lastValid ), "_abcdefghijklmnopqrstuvwxyz", "bl") + x.substring(lastValid)
 					}
 					return x;
 				});
@@ -120,12 +120,12 @@
 				var translated = blblblInput.value.replace(/[^blBL?! ]/g, '').toLowerCase().split(" ").map(x => 
 				{
 					if (checkBaseValid(x, "bl"))
-					return convertBase(x, "bl", "abcdefghijklmnopqrstuvwxyz");
+					return convertBase(x, "bl", "_abcdefghijklmnopqrstuvwxyz");
 					else
 					{
 						let lastValid = baseValidIndex(x, "bl")
 						console.log(x.substring(lastValid));
-						return convertBase(x.substring(0, lastValid ), "bl", "abcdefghijklmnopqrstuvwxyz") + x.substring(lastValid)
+						return convertBase(x.substring(0, lastValid ), "bl", "_abcdefghijklmnopqrstuvwxyz") + x.substring(lastValid)
 					}
 					return x;
 				});
